@@ -3,7 +3,8 @@
         xmlns:charts="clr-namespace:LiveChartsCore.SkiaSharpView.Avalonia;assembly=LiveChartsCore.SkiaSharpView.Avalonia"
         xmlns:skiaSharpView="clr-namespace:LiveChartsCore.SkiaSharpView;assembly=LiveChartsCore.SkiaSharpView"
         x:Class="AdcDacConversion.MainWindow"
-        Width="1200" Height="600" Title="ADC and DAC Demonstration">
+        Width="1200" Height="600" Title="ADC and DAC Demonstration"
+        CanResize="False">
 
     <Grid RowDefinitions="Auto, *" ColumnDefinitions="*, *" Margin="20">
         <Panel Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="2" ZIndex="0">

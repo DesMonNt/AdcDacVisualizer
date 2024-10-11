@@ -1,33 +1,32 @@
 using System;
+using System.Collections.Generic;
 using Avalonia;
 using Avalonia.Controls;
 using LiveChartsCore;
-using LiveChartsCore.SkiaSharpView;
 using System.Collections.ObjectModel;
 using System.Linq;
-using AdcDacConversion.Model;
-using LiveChartsCore.Kernel;
+using AdcDacConversion.AdcDacModel;
+using AdcDacConversion.Graphics;
+using Avalonia.Media;
 using LiveChartsCore.SkiaSharpView.Painting;
 using SkiaSharp;
 
 namespace AdcDacConversion;
 
-using ChartPoint = Graphics.ChartPoint;
-
 public partial class MainWindow : Window
 {
     private const int BitDepth = 4;
-    private const double ReferenceVoltage = 5d;
+    private const double ReferenceVoltage = 5;
     
-    private Model.Model Model { get; }
-    private ObservableCollection<ISeries> AdcSeries { get; }
+    private Model Model { get; }
+    private string BinaryDigitalValue => Convert.ToString(Model.DigitalValue, 2).PadLeft(BitDepth, '0');
+    private ObservableCollection<ISeries> AdcSeries { get; } = [];
     
     public MainWindow()
     {
         InitializeComponent();
 
-        Model = new Model.Model(BitDepth, ReferenceVoltage);
-        AdcSeries = new ObservableCollection<ISeries>();
+        Model = new Model(BitDepth, ReferenceVoltage);
         AdcChart.Series = AdcSeries;
         ComparatorsGrid = this.FindControl<Grid>("ComparatorsGrid");
         ResistorsGrid = this.FindControl<Grid>("ResistorsGrid");
@@ -45,7 +44,7 @@ public partial class MainWindow : Window
         Model.Voltage = VoltageSlider.Value;
         
         VoltageLabel.Text = $"Voltage: {Model.Voltage:F2}V";
-        AdcValueLabel.Text = $"Digital Value: {Convert.ToString(Model.DigitalValue, 2)}";
+        AdcValueLabel.Text = $"Digital Value: {BinaryDigitalValue}";
         DacValueLabel.Text = $"Analog Voltage: {Model.AnalogVoltage:F2}V";
 
         UpdateCharts(Model.Voltage);
@@ -56,44 +55,23 @@ public partial class MainWindow : Window
     private void UpdateCharts(double voltage)
     {
         AdcSeries.Clear();
-
-        var color = new SolidColorPaint(SKColors.Yellow) { StrokeThickness = 5 };
-        var converter = new AdcConverter(BitDepth, ReferenceVoltage);
-        var voltageRange = Enumerable.Range(0, 101).Select(i => i * voltage / 100.0).ToList();
-        var values = voltageRange.Select(v => new ChartPoint(v,converter.Convert(v))).ToList();
         
-        var lineSeries = new LineSeries<ChartPoint>
-        {
-            Values = values,
-            Mapping = (point, _) => new Coordinate(point.Value, point.Voltage),
-            Fill = null,
-            GeometrySize = 1,
-            Stroke = color,
-            GeometryStroke = color
-        };
-
-        AdcSeries.Add(lineSeries);
+        var converter = new AdcConverter(BitDepth, ReferenceVoltage);
+        var perfectValues = new List<ChartPoint> { new(0, 0), new(Model.Voltage, Model.DigitalValue) };
+        var realValues = Enumerable.Range(0, 101)
+            .Select(i => i * voltage / 100.0)
+            .Select(analogVoltage => new ChartPoint(analogVoltage, converter.Convert(analogVoltage)))
+            .ToList();
+        
+        AdcSeries.Add(LiveChartExtension.GetLineSeries(perfectValues, new SolidColorPaint(SKColors.Orange) { StrokeThickness = 5 }));
+        AdcSeries.Add(LiveChartExtension.GetLineSeries(realValues, new SolidColorPaint(SKColors.CornflowerBlue) { StrokeThickness = 5 }));
     }
 
     private void UpdateResistorsLamps()
     {
-        var binaryValue = Convert.ToString(Model.DigitalValue, 2)
-            .PadLeft(4, '0')
-            .Select(x => x == '1')
-            .ToArray();
-
         for (var i = 0; i < BitDepth; i++)
         {
-            var lamp = new Border
-            {
-                Width = 20,
-                Height = 20,
-                BorderThickness = new Thickness(1),
-                BorderBrush = Avalonia.Media.Brushes.Black,
-                Background = binaryValue[i] ? Avalonia.Media.Brushes.Yellow : Avalonia.Media.Brushes.Gray,
-                HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Center,
-                VerticalAlignment = Avalonia.Layout.VerticalAlignment.Center
-            };
+            var lamp = GetLamp(BinaryDigitalValue[i] == '1' ? Brushes.Yellow : Brushes.Gray);
             
             ResistorsGrid.Children.Add(lamp);
             Grid.SetRow(lamp, i);
@@ -101,25 +79,23 @@ public partial class MainWindow : Window
     }
     private void UpdateComparatorsLamps()
     {
-        ComparatorsGrid.Children.Clear();
-
-        var length = Model.Comparators.Count;
-        
-        for (var i = 0; i < length; i++)
+        for (var i = 0; i < Model.Comparators.Count; i++)
         {
-            var lamp = new Border
-            {
-                Width = 20,
-                Height = 20,
-                BorderThickness = new Thickness(1),
-                BorderBrush = Avalonia.Media.Brushes.Black,
-                Background = Model.Comparators[i] ? Avalonia.Media.Brushes.Yellow : Avalonia.Media.Brushes.Gray,
-                HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Center,
-                VerticalAlignment = Avalonia.Layout.VerticalAlignment.Center
-            };
+            var lamp = GetLamp(Model.Comparators[i] ? Brushes.Yellow : Brushes.Gray);
             
             ComparatorsGrid.Children.Add(lamp);
             Grid.SetRow(lamp, i);
         }
     }
+    
+    private static Border GetLamp(IBrush color) => new()
+    {
+        Width = 20,
+        Height = 20,
+        BorderThickness = new Thickness(1),
+        BorderBrush = Brushes.Black,
+        Background = color,
+        HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Center,
+        VerticalAlignment = Avalonia.Layout.VerticalAlignment.Center
+    };
 }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace AdcDacConversion.Model;
+namespace AdcDacConversion.AdcDacModel;
 
 internal sealed class Model(int bitDepth, double referenceVoltage)
 {

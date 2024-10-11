@@ -1,4 +1,4 @@
-﻿namespace AdcDacConversion.Model;
+﻿namespace AdcDacConversion.AdcDacModel;
 
 internal interface IConverter<in TSource, out TResult>
 {

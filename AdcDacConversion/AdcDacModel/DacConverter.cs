@@ -1,4 +1,4 @@
-﻿namespace AdcDacConversion.Model;
+﻿namespace AdcDacConversion.AdcDacModel;
 
 internal class DacConverter(int bitDepth, double referenceVoltage) : IConverter<int, double>
 {

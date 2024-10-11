@@ -65,3 +65,4 @@ C:\Users\DesMo\RiderProjects\AvaloniaApplication1\AdcDacConversion\obj\Release\n
 C:\Users\DesMo\RiderProjects\AvaloniaApplication1\AdcDacConversion\obj\Release\net8.0\AdcDacCo.1A0D7B1D.Up2Date
 C:\Users\DesMo\RiderProjects\AvaloniaApplication1\AdcDacConversion\obj\Release\net8.0\AdcDacConversion.genruntimeconfig.cache
 C:\Users\DesMo\RiderProjects\AvaloniaApplication1\AdcDacConversion\obj\Release\net8.0\ref\AdcDacConversion.dll
+C:\Users\DesMo\RiderProjects\AvaloniaApplication1\AdcDacConversion\obj\Release\net8.0\AdcDacConversion.sourcelink.json

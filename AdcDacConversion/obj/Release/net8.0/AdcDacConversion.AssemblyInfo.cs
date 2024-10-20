@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AdcDacConversion")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d136c6b70dbe6350ffede257e8d3ae2d603f7a89")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+865400e6088cbab07b1cc677ffa9abd74849dfe7")]
 [assembly: System.Reflection.AssemblyProductAttribute("AdcDacConversion")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AdcDacConversion")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

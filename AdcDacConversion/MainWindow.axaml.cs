@@ -42,6 +42,7 @@ public partial class MainWindow : Window
         
         VoltageSlider.PropertyChanged += VoltageSlider_ValueChanged;
         Timer.Tick += OnTimerElapsed;
+        Functions.IsVisible = false;
     }
 
     private void VoltageSlider_ValueChanged(object? sender, AvaloniaPropertyChangedEventArgs e)
@@ -60,6 +61,7 @@ public partial class MainWindow : Window
         _voltageValues.Clear();
         _currentTime = 0;
         VoltageSlider.IsVisible = selectedItem.Content.ToString() == "Постоянный";
+        Functions.IsVisible = selectedItem.Content.ToString() == "Переменный";
     }
 
     private void UpdateComparatorLedPanel()
@@ -83,29 +85,41 @@ public partial class MainWindow : Window
         if (CurrentTypeComboBox.SelectedItem is not ComboBoxItem selectedItem) 
             return;
 
-        Model.Voltage = selectedItem.Content.ToString() == "Постоянный" 
-            ? VoltageSlider.Value 
-            : 2.5 + 2.5 * Math.Sin(_currentTime / 10);
+        if (selectedItem.Content.ToString() == "Постоянный")
+        {
+            Model.Voltage = VoltageSlider.Value;
+            return;
+        }
+
+        if (SineRadioButton.IsChecked ?? false)
+            Model.Voltage = 2.5 + 2.5 * Math.Sin(_currentTime / 10);
+        else if (TriangleRadioButton.IsChecked ?? false)
+            Model.Voltage = 2.5 + 2.5 * (Math.Abs(_currentTime % 20 - 10) / 5 - 1);
+        else if (SquareRadioButton.IsChecked ?? false)
+            Model.Voltage = _currentTime % 20 < 10 ? 5 : 0;
     }
 
     private void UpdateChart()
     {
         AdcChart.Series = new ISeries[] { new LineSeries<ObservableValue> 
-                { 
-                    Values = _voltageValues, 
-                    Stroke = new SolidColorPaint(SKColors.Orange) {StrokeThickness = 5},
-                    GeometryStroke = new SolidColorPaint(SKColors.Orange),
-                    GeometrySize = 0,
-                    Fill = new SolidColorPaint(SKColors.Empty)
-                }};
+        { 
+            Values = _voltageValues,
+            Stroke = new SolidColorPaint(SKColors.Orange) {StrokeThickness = 5},
+            GeometryStroke = new SolidColorPaint(SKColors.Orange),
+            GeometrySize = 0,
+            Fill = new SolidColorPaint(SKColors.Empty),
+            AnimationsSpeed = TimeSpan.Zero,
+            LineSmoothness = 0
+        }};
         DacChart.Series = new ISeries[] { new StepLineSeries<ObservableValue> 
-            { 
-                Values = _analogVoltageValues, 
-                Stroke = new SolidColorPaint(SKColors.CornflowerBlue) {StrokeThickness = 5},
-                GeometryStroke = new SolidColorPaint(SKColors.CornflowerBlue),
-                GeometrySize = 0,
-                Fill = new SolidColorPaint(SKColors.Empty)
-            }};
+        { 
+            Values = _analogVoltageValues,
+            Stroke = new SolidColorPaint(SKColors.CornflowerBlue) {StrokeThickness = 5},
+            GeometryStroke = new SolidColorPaint(SKColors.CornflowerBlue),
+            GeometrySize = 0,
+            Fill = new SolidColorPaint(SKColors.Empty),
+            AnimationsSpeed = TimeSpan.Zero
+        }};
     }
 
     private void OnTimerElapsed(object sender, EventArgs e)

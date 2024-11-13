@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AdcDacVisualizer")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+92980e8cdfc7a2a018e68bf388a2c58bf73ab754")]
 [assembly: System.Reflection.AssemblyProductAttribute("AdcDacVisualizer")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AdcDacVisualizer")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -21,6 +21,17 @@
     </ItemGroup>
 
     <ItemGroup>
-      <AvaloniaResource Include="Assets\background.png" />
+      <Compile Update="UI\App.axaml.cs">
+        <DependentUpon>App.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="UI\MainWindow.axaml.cs">
+        <DependentUpon>MainWindow.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+    </ItemGroup>
+
+    <ItemGroup>
+      <AvaloniaResource Include="UI\Assets\background.png" />
     </ItemGroup>
 </Project>

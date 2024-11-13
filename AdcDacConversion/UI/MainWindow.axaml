@@ -5,7 +5,7 @@
         xmlns:charts="clr-namespace:LiveChartsCore.SkiaSharpView.Avalonia;assembly=LiveChartsCore.SkiaSharpView.Avalonia"
         xmlns:skiaSharpView="clr-namespace:LiveChartsCore.SkiaSharpView;assembly=LiveChartsCore.SkiaSharpView"
         mc:Ignorable="d"
-        x:Class="AdcDacConversion.MainWindow"
+        x:Class="AdcDacConversion.UI.MainWindow"
         Title="АЦП и ЦАП Визуализация"
         Width="800" Height="700"
         Background="DarkGray"

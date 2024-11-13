@@ -1,10 +1,9 @@
-using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 
-namespace AdcDacConversion;
+namespace AdcDacConversion.UI;
 
-public class App : Application
+public class App : Avalonia.Application
 {
     public override void Initialize()
     {

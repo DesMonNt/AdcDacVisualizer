@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\DesMo\\RiderProjects\\AvaloniaApplication1\\AdcDacConversion\\AdcDacConversion.csproj": {}
+    "C:\\Users\\DesMo\\OneDrive\\Рабочий стол\\AdcDacVisualizer\\AdcDacConversion\\AdcDacConversion.csproj": {}
   },
   "projects": {
-    "C:\\Users\\DesMo\\RiderProjects\\AvaloniaApplication1\\AdcDacConversion\\AdcDacConversion.csproj": {
+    "C:\\Users\\DesMo\\OneDrive\\Рабочий стол\\AdcDacVisualizer\\AdcDacConversion\\AdcDacConversion.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\DesMo\\RiderProjects\\AvaloniaApplication1\\AdcDacConversion\\AdcDacConversion.csproj",
+        "projectUniqueName": "C:\\Users\\DesMo\\OneDrive\\Рабочий стол\\AdcDacVisualizer\\AdcDacConversion\\AdcDacConversion.csproj",
         "projectName": "AdcDacConversion",
-        "projectPath": "C:\\Users\\DesMo\\RiderProjects\\AvaloniaApplication1\\AdcDacConversion\\AdcDacConversion.csproj",
+        "projectPath": "C:\\Users\\DesMo\\OneDrive\\Рабочий стол\\AdcDacVisualizer\\AdcDacConversion\\AdcDacConversion.csproj",
         "packagesPath": "C:\\Users\\DesMo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\DesMo\\RiderProjects\\AvaloniaApplication1\\AdcDacConversion\\obj\\",
+        "outputPath": "C:\\Users\\DesMo\\OneDrive\\Рабочий стол\\AdcDacVisualizer\\AdcDacConversion\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\DesMo\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -43,6 +43,10 @@
               "version": "[11.1.0, )"
             },
             "Avalonia.Desktop": {
+              "target": "Package",
+              "version": "[11.1.0, )"
+            },
+            "Avalonia.Diagnostics": {
               "target": "Package",
               "version": "[11.1.0, )"
             },

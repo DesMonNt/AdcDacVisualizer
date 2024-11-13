@@ -14,13 +14,13 @@ build_property.InvariantGlobalization =
 build_property.PlatformNeutralAssembly = 
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
-build_property.RootNamespace = AvaloniaApplication1
-build_property.ProjectDir = C:\Users\DesMo\RiderProjects\AvaloniaApplication1\AdcDacVisualizer\
+build_property.RootNamespace = AdcDacConversion
+build_property.ProjectDir = C:\Users\DesMo\OneDrive\Рабочий стол\AdcDacVisualizer\AdcDacVisualizer\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 
-[C:/Users/DesMo/RiderProjects/AvaloniaApplication1/AdcDacVisualizer/App.axaml]
+[C:/Users/DesMo/OneDrive/Рабочий стол/AdcDacVisualizer/AdcDacVisualizer/App.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[C:/Users/DesMo/RiderProjects/AvaloniaApplication1/AdcDacVisualizer/MainWindow.axaml]
+[C:/Users/DesMo/OneDrive/Рабочий стол/AdcDacVisualizer/AdcDacVisualizer/MainWindow.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml

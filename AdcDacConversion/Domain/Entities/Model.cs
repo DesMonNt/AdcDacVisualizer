@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using AdcDacConversion.Domain.Services;
 
-namespace AdcDacConversion.AdcDacModel;
+namespace AdcDacConversion.Domain.Entities;
 
-internal sealed class Model(int bitDepth, double referenceVoltage)
+public sealed class Model(int bitDepth, double referenceVoltage)
 {
     public double Voltage
     {

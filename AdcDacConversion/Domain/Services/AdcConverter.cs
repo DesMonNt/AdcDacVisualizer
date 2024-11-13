@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using AdcDacConversion.AdcDacModel;
 
-namespace AdcDacConversion.AdcDacModel;
+namespace AdcDacConversion.Domain.Services;
 
 internal class AdcConverter(int bitDepth, double referenceVoltage) : IConverter<double, int>
 {

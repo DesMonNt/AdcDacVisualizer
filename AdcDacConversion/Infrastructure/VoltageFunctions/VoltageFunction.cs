@@ -2,7 +2,7 @@
 
 public abstract class VoltageFunction(double maxVoltage)
 {
-    protected double MaxVoltage = maxVoltage;
+    protected readonly double MaxVoltage = maxVoltage;
 
-    public abstract double CalculateNewVoltage(double currentVoltage, double currentTime);
+    public abstract double CalculateNewVoltage(double currentTime);
 }

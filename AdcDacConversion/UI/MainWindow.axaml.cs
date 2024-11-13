@@ -15,24 +15,17 @@ namespace AdcDacConversion.UI;
 
 public partial class MainWindow : Window
 {
-    private const int BitDepth = 4;
-    private const double ReferenceVoltage = 5;
-
-    private ConversionService ConversionService { get; } = new(BitDepth, ReferenceVoltage);
+    private ConversionService ConversionService { get; set; } = new(4, 5);
     private Timer Timer { get; } = new(TimeSpan.FromMilliseconds(100));
     
     private readonly Graphic _voltageGraphic = new(GraphicsType.Line, SKColors.Orange, 50);
     private readonly Graphic _analogVoltageGraphic = new(GraphicsType.StepLine, SKColors.CornflowerBlue, 50);
+    private int _bitDepth = 4;
     
     public MainWindow()
     {
         InitializeComponent();
-    
-        for (var i = 0; i < ConversionService.Model.Comparators.Count; i++)
-            ComparatorLedPanel.Children.Add(UiUtilities.CreateLed());
-
-        for (var i = 0; i < BitDepth; i++)
-            ResistorLedPanel.Children.Add(UiUtilities.CreateLed());
+        InitializeLedPanels();
         
         VoltageSlider.PropertyChanged += VoltageSlider_ValueChanged;
         Timer.TimerElapsed += OnTimerElapsed;
@@ -40,7 +33,16 @@ public partial class MainWindow : Window
         
         Timer.Start();
     }
+    
+    private void InitializeLedPanels()
+    {
+        for (var i = 0; i < ConversionService.Model.Comparators.Count; i++)
+            ComparatorLedPanel.Children.Add(UiUtilities.CreateLed());
 
+        for (var i = 0; i < _bitDepth; i++)
+            ResistorLedPanel.Children.Add(UiUtilities.CreateLed());
+    }
+    
     private void VoltageSlider_ValueChanged(object? sender, AvaloniaPropertyChangedEventArgs e)
     {
         if (e.Property.Name != "Value" || sender is not Slider slider) 
@@ -60,6 +62,24 @@ public partial class MainWindow : Window
         Timer.Restart();
     }
 
+    private void OnBitDepthChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (DacResolutionComboBox.SelectedItem is not ComboBoxItem item) 
+            return;
+
+        var content = item.Content?.ToString();
+        
+        if (content is null)
+            return;
+        
+        _bitDepth = int.Parse(content.Split()[0]);
+        ConversionService = new ConversionService(_bitDepth, 5);
+        
+        ComparatorLedPanel.Children.Clear();
+        ResistorLedPanel.Children.Clear();
+        InitializeLedPanels();
+    }
+
     private void UpdateComparatorLedPanel()
     {
         var ledPanel = ComparatorLedPanel.Children.OfType<Ellipse>().ToArray();
@@ -72,7 +92,7 @@ public partial class MainWindow : Window
     {
         var ledPanel = ResistorLedPanel.Children.OfType<Ellipse>().ToArray();
 
-        for (var i = 0; i < BitDepth; i++)
+        for (var i = 0; i < _bitDepth; i++)
             ledPanel[i].Fill = ConversionService.BinaryDigitalValue[i] == '1' ? Brushes.Gold : Brushes.SlateGray;
     }
 

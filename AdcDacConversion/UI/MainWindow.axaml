@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         x:Class="AdcDacConversion.UI.MainWindow"
         Title="АЦП и ЦАП Визуализация"
-        Width="800" Height="700"
+        Width="800" Height="900"
         Background="DarkGray"
         CanResize="False">
     <StackPanel Margin="20">
@@ -16,6 +16,14 @@
         <ComboBox x:Name="CurrentTypeComboBox" HorizontalAlignment="Left" SelectionChanged="OnCurrentTypeChanged">
             <ComboBoxItem Content="Постоянный"/>
             <ComboBoxItem Content="Переменный"/>
+        </ComboBox>
+        
+        <TextBlock Text="Разрядность ЦАП" Margin="0,10,0,10" TextAlignment="Left" Foreground="Black"/>
+        <ComboBox x:Name="DacResolutionComboBox" HorizontalAlignment="Left" SelectionChanged="OnBitDepthChanged">
+            <ComboBoxItem Content="1 бит"/>
+            <ComboBoxItem Content="2 бит"/>
+            <ComboBoxItem Content="3 бит"/>
+            <ComboBoxItem Content="4 бит"/>
         </ComboBox>
         
         <StackPanel>

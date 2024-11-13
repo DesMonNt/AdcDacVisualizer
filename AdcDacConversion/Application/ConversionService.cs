@@ -11,7 +11,7 @@ public class ConversionService(int bitDepth, double referenceVoltage)
     
     private VoltageFunction _voltageFunction = new Sin(referenceVoltage);
 
-    public double CalculateNewVoltage(double time) => _voltageFunction.CalculateNewVoltage(referenceVoltage, time);
+    public double CalculateNewVoltage(double time) => _voltageFunction.CalculateNewVoltage(time);
     
     public void SwitchVoltageFunction(VoltageFunctions function)
     {
@@ -19,8 +19,8 @@ public class ConversionService(int bitDepth, double referenceVoltage)
         {
             VoltageFunctions.Constant => new Sin(referenceVoltage),
             VoltageFunctions.Sin => new Sin(referenceVoltage),
-            VoltageFunctions.TriangularWave => new TriangularWave(referenceVoltage, 2 * referenceVoltage, referenceVoltage / 4),
-            VoltageFunctions.SquareWave => new SquareWave(referenceVoltage, 2 * referenceVoltage),
+            VoltageFunctions.TriangularWave => new TriangularWave(referenceVoltage, referenceVoltage, referenceVoltage / 4),
+            VoltageFunctions.SquareWave => new SquareWave(referenceVoltage, referenceVoltage),
             _ => throw new ArgumentOutOfRangeException(nameof(function), function, null)
         };
     }

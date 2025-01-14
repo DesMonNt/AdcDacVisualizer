@@ -19,8 +19,8 @@ build_property.ProjectDir = C:\Users\DesMo\RiderProjects\AvaloniaApplication1\Ad
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 
-[C:/Users/DesMo/RiderProjects/AvaloniaApplication1/AdcDacConversion/App.axaml]
+[C:/Users/DesMo/RiderProjects/AvaloniaApplication1/AdcDacConversion/UI/App.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[C:/Users/DesMo/RiderProjects/AvaloniaApplication1/AdcDacConversion/MainWindow.axaml]
+[C:/Users/DesMo/RiderProjects/AvaloniaApplication1/AdcDacConversion/UI/MainWindow.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml

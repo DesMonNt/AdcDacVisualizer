@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Linq;
 using AdcDacConversion.Application;
 using AdcDacConversion.Domain.Entities;
@@ -8,8 +9,10 @@ using AdcDacConversion.Infrastructure.VoltageFunctions;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Shapes;
+using Avalonia.Interactivity;
 using Avalonia.Media;
 using SkiaSharp;
+using Path = System.IO.Path;
 
 namespace AdcDacConversion.UI;
 
@@ -42,6 +45,8 @@ public partial class MainWindow : Window
         for (var i = 0; i < _bitDepth; i++)
             ResistorLedPanel.Children.Add(UiUtilities.CreateLed());
     }
+    
+    private void OpenHelp_Click(object? sender, RoutedEventArgs e) => ShowHelpPdf();
     
     private void VoltageSlider_ValueChanged(object? sender, AvaloniaPropertyChangedEventArgs e)
     {
@@ -131,5 +136,19 @@ public partial class MainWindow : Window
         UpdateComparatorLedPanel();
         UpdateResistorLedPanel();
         UpdateVoltage();
+    }
+    
+    private void ShowHelpPdf()
+    {
+        var fullPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assets/help.pdf");
+        
+        if (!File.Exists(fullPath)) 
+            return;
+        
+        System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+        {
+            FileName = fullPath,
+            UseShellExecute = true
+        });
     }
 }

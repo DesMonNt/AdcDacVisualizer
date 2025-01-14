@@ -30,8 +30,4 @@
         <SubType>Code</SubType>
       </Compile>
     </ItemGroup>
-
-    <ItemGroup>
-      <AvaloniaResource Include="UI\Assets\background.png" />
-    </ItemGroup>
 </Project>
